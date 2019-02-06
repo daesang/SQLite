@@ -15,8 +15,8 @@ namespace Notes
         {
             base.OnAppearing();
 
-            //listView.ItemsSource = await App.Database.GetNotesAsync<Note>();
-            listView.ItemsSource = await App.Database.GetObject<Note>("22");
+            listView.ItemsSource = await App.Database.GetNotesAsync<Note>();
+            //listView.ItemsSource = await App.Database.GetObject<Note>("22");
                         
         }
 

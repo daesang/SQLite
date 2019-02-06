@@ -3,6 +3,7 @@ using System.Threading.Tasks;
 using SQLite;
 using Notes.Models;
 using System;
+using System.Diagnostics;
 
 namespace Notes.Data
 {
@@ -52,6 +53,32 @@ namespace Notes.Data
             return string.Empty;
         }
 
+        public async Task<string> SaveNoteAsync<T>(T item, int id)
+        {
+
+            if (await _database.UpdateAsync(item, typeof(T)) == 0)
+            {
+                await _database.InsertAsync(item, typeof(T));
+            }
+
+            //if (await _database.InsertAsync(item, typeof(T)) != 0)
+            //{
+            //    await _database.UpdateAsync(item, typeof(T));
+            //}
+
+            //if(id != 0)
+            //{
+            //    await _database.InsertAsync(item, typeof(T));
+            //}
+            //else
+            //{
+            //    await _database.UpdateAsync(item, typeof(T));
+            //}
+
+            return string.Empty;
+        }
+
+
         public async Task<string> UpdateNoteAsync<T>(T item)
         {
             await _database.UpdateAsync(item, typeof(T));
@@ -59,9 +86,16 @@ namespace Notes.Data
             return string.Empty;
         }
 
-        public async Task<string> SaveNoteAsync<T>(T item)
+        public async Task<string> InsertNoteAsync<T>(T item)
         {
-            await _database.InsertAsync(item, typeof(T));
+            try
+            {
+                await _database.InsertAsync(item, typeof(T));
+            }
+            catch(Exception e)
+            {
+                return e.Message;
+            }
             
             return string.Empty;
         }
