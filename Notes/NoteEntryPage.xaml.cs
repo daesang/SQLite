@@ -22,7 +22,7 @@ namespace Notes
             note.Date = DateTime.UtcNow;
             //note.PW = "test";
 
-            await App.Database.SaveNoteAsync(note, note.ID);
+            await App.Database.SaveNoteAsync(note);
             //if (note.ID != 0)
             //{
             //    await App.Database.UpdateNoteAsync<Note>(note);

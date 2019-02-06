@@ -16,6 +16,17 @@ namespace Notes.Data
         {
             _database = new SQLiteAsyncConnection(dbPath);
             _database.CreateTablesAsync<Note, Note2>().Wait();
+
+
+            //string[] columnNames = {"Date", "Test"};
+            //try
+            //{
+            //    _database.CreateIndexAsync("Note_Index", "Note", columnNames, false);
+            //}
+            //catch(Exception e)
+            //{
+            //    Console.WriteLine(e.Message);
+            //}
         }
 
         public async Task<IList<T>> GetNotesAsync<T>() where T : class, new()
@@ -53,7 +64,7 @@ namespace Notes.Data
             return string.Empty;
         }
 
-        public async Task<string> SaveNoteAsync<T>(T item, int id)
+        public async Task<string> SaveNoteAsync<T>(T item)
         {
 
             if (await _database.UpdateAsync(item, typeof(T)) == 0)

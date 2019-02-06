@@ -7,8 +7,9 @@ namespace Notes.Models
     {
         [PrimaryKey, AutoIncrement]
         public int ID { get; set; }
-
+        [Indexed]
         public string Text { get; set; }
+        [Indexed]
         public DateTime Date { get; set; }
     }
 }
